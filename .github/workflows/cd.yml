@@ -28,11 +28,13 @@ jobs:
         run: GOOS=windows GOARCH=amd64 go build -o dist/go-api-windows.exe .
 
       - name: Pack release bundle
-        run: tar -czf dist/go-api-${{ github.sha }}.tar.gz -C dist .
+        run: tar -czf go-api-${{ github.sha }}.tar.gz -C dist .
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v4
         with:
           name: go-api-build
-          path: dist/
+          path: |
+            dist/
+            go-api-${{ github.sha }}.tar.gz
           retention-days: 7
