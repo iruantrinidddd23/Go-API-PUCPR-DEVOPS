@@ -43,6 +43,7 @@ func (a app) handleAbout(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{
 		"stack":     "Go",
 		"ci":        "GitHub Actions",
+		"delivery":  "Continuous Delivery",
 		"container": "Docker",
 	})
 }

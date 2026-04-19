@@ -69,6 +69,10 @@ func TestAboutEndpoint(t *testing.T) {
 		t.Fatalf("expected Go stack, got %q", payload["stack"])
 	}
 
+	if payload["delivery"] != "Continuous Delivery" {
+		t.Fatalf("expected Continuous Delivery, got %q", payload["delivery"])
+	}
+
 	if payload["container"] != "Docker" {
 		t.Fatalf("expected Docker container, got %q", payload["container"])
 	}
