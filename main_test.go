@@ -86,3 +86,23 @@ func TestGetEnvFallsBackWhenMissing(t *testing.T) {
 		t.Fatalf("expected fallback value, got %q", got)
 	}
 }
+
+func TestGetEnvUsesExistingValue(t *testing.T) {
+	const key = "SET_ENV_FOR_TEST"
+	t.Setenv(key, "configured")
+
+	if got := getEnv(key, "fallback"); got != "configured" {
+		t.Fatalf("expected configured value, got %q", got)
+	}
+}
+
+func TestHealthEndpointReturnsJSONContentType(t *testing.T) {
+	response := httptest.NewRecorder()
+	request := httptest.NewRequest(http.MethodGet, "/health", nil)
+
+	newServer().ServeHTTP(response, request)
+
+	if got := response.Header().Get("Content-Type"); got != "application/json" {
+		t.Fatalf("expected application/json content type, got %q", got)
+	}
+}
